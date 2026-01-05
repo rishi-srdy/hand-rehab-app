@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <h2 class="section-title">{{ subject_id }} → {{ hand }}</h2>
+
+  <p class="small">
+    File: <span class="badge">{{ file_name }}</span>
+    {% if activity %}
+      &nbsp; Activity: <span class="badge">{{ activity }}</span>
+    {% else %}
+      &nbsp; Task: <span class="badge">{{ task }}</span>
+    {% endif %}
+  </p>
+
+  <div class="card plot-card">
+    <div class="plot-head">
+      <h3 class="card-title">
+        {% if activity %}
+          {{ activity }} (task vs other)
+        {% else %}
+          {{ task }} (segments)
+        {% endif %}
+      </h3>
+      <p class="card-sub">X = Absolute Timestamp(s)</p>
+    </div>
+
+    <div class="plot-box" id="main-plot"></div>
+    <p id="plot-status" class="small">Loading plot…</p>
+  </div>
+
+  <!-- ✅ Embed context safely (NO JS syntax errors) -->
+  <script id="plot-ctx" type="application/json">
+    {{ {
+      "approach_id": approach_id,
+      "subject_id": subject_id,
+      "hand": hand,
+      "file_name": file_name,
+      "task": task,
+      "activity": (activity if activity else "")
+    } | tojson }}
+  </script>
+
+  <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</div>
+{% endblock %}

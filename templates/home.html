@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <h2 class="section-title">Hand Rehabilitation Analysis</h2>
+  <p class="small">
+    Choose an analysis approach
+  </p>
+
+  <div class="grid">
+    <!-- Approach 1 -->
+    <div class="card">
+      <h3 class="card-title">Approach 1</h3>
+      <p class="card-sub">
+        Task-wise IMU analysis<br>
+        (SideToSide, Pour, VerticalSip, VerticalShelf)
+      </p>
+
+      <div class="btnrow">
+        <a class="btn primary" href="/approach/1">
+          View Results
+        </a>
+      </div>
+    </div>
+
+    <!-- Approach 2 -->
+    <div class="card">
+      <h3 class="card-title">Approach 2</h3>
+      <p class="card-sub">
+        Continuous IMU analysis<br>
+        (entire session data)
+      </p>
+
+      <div class="btnrow">
+        <a class="btn primary" href="/approach/2">
+          View Results
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

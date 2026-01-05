@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2 class="section-title">Subject {{ subject_id }} → {{ hand }}</h2>
+
+  {% if approach_id == 1 %}
+    <p class="small">Select a recording (tiles are named by detected task)</p>
+  {% else %}
+    <p class="small">Select an activity (tiles are named by detected activity from results.txt)</p>
+  {% endif %}
+
+  <div class="grid">
+    {% for it in items %}
+      <div class="card">
+        <h3 class="card-title">{{ it.task }}</h3>
+        <p class="card-sub">{{ it.file }}</p>
+
+        <div class="btnrow">
+          <a class="btn primary"
+            href="{{ url_for('approach_plot',
+                  approach_id=approach_id,
+                  subject_id=subject_id,
+                  hand=hand,
+                  file_name=it.file,
+                  activity=it.task
+            ) }}">
+            View Plot
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if items|length == 0 %}
+    {% if approach_id == 1 %}
+      <p class="small">No Excel files found in Results/Approach1/{{ subject_id }}/{{ hand }}/</p>
+    {% else %}
+      <p class="small">No *_results.txt files found in Results/Approach2/{{ subject_id }}/{{ hand }}/</p>
+    {% endif %}
+  {% endif %}
+{% endblock %}

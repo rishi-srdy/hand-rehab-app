@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hand Rehabilitation – IMU Analysis</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+
+  <!-- 🔝 Top Navigation Bar -->
+  <header class="topbar">
+    <div class="brand">
+      <h1>✋ Hand Rehabilitation – IMU Analysis</h1>
+      <p>Segment-based NJS visualization</p>
+
+      {% if breadcrumbs %}
+        <nav class="breadcrumb">
+          {% for crumb in breadcrumbs %}
+            {% if crumb.url %}
+              <a href="{{ crumb.url }}">{{ crumb.label }}</a>
+            {% else %}
+              <span class="current">{{ crumb.label }}</span>
+            {% endif %}
+
+            {% if not loop.last %}
+              <span class="sep">›</span>
+            {% endif %}
+          {% endfor %}
+        </nav>
+      {% endif %}
+    </div>
+
+    <div class="nav-actions">
+      <a href="/" class="btn ghost">🏠 Home</a>
+    </div>
+  </header>
+
+  <!-- Page Content -->
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+</body>
+</html>

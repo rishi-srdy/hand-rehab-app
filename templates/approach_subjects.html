@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2 class="section-title">{{ approach_name }}</h2>
+  <p class="small">Select a subject</p>
+
+  <div class="grid">
+    {% for s in subjects %}
+      <div class="card">
+        <h3 class="card-title">Subject {{ s }}</h3>
+
+        <div class="btnrow">
+          <a class="btn primary" href="/approach/{{ approach_id }}/{{ s }}">
+            Open
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if subjects|length == 0 %}
+    <p class="small">No subjects found.</p>
+  {% endif %}
+{% endblock %}

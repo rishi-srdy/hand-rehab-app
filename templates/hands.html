@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2 class="section-title">{{ approach_name }} → Subject {{ subject_id }}</h2>
+  <p class="small">Select Hand</p>
+
+  <div class="grid">
+    {% for hand in hands %}
+      <div class="card">
+        <h3 class="card-title">{{ hand }}</h3>
+        <p class="card-sub">Browse files for this hand</p>
+
+        <div class="btnrow">
+          <a class="btn primary"
+            href="/approach/{{ approach_id }}/{{ subject_id }}/{{ hand }}">
+            Open
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% if hands|length == 0 %}
+    <p class="small">No hand folders found under Results/{{ approach_name|replace(" ", "") }}/{{ subject_id }}/</p>
+  {% endif %}
+{% endblock %}
