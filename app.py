@@ -22,7 +22,7 @@ def detect_task_from_excel(excel_path: Path) -> str:
       2) else: "Unknown"
     """
     try:
-        xls = pd.ExcelFile(excel_path)
+        xls = pd.ExcelFile(excel_path, engine="openpyxl")
         sheet_names = set(xls.sheet_names)
 
         # quick filter by expected task sheet names
@@ -33,7 +33,7 @@ def detect_task_from_excel(excel_path: Path) -> str:
         # ensure the candidate actually has data (not just an empty sheet)
         for task in candidates:
             try:
-                df = pd.read_excel(excel_path, sheet_name=task)
+                df = pd.read_excel(excel_path, sheet_name=task, engine="openpyxl")
                 if df is not None and len(df.index) > 0:
                     return task
             except Exception:
@@ -41,6 +41,7 @@ def detect_task_from_excel(excel_path: Path) -> str:
 
         return candidates[0]  # fallback
     except Exception:
+        print(f"[detect_task_from_excel] Failed for {excel_path.name}: {e}")
         return "Unknown"
 
 def detect_activities_from_results_txt(txt_path: Path) -> list[str]:
@@ -205,7 +206,7 @@ def build_plotly_figure_for_excel(
     X = absolute timestamps.
     Each segment becomes one trace.
     """
-    df = pd.read_excel(excel_path, sheet_name=task_name)
+    df = pd.read_excel(excel_path, sheet_name=task_name, engine="openpyxl")
 
     # Minimal required columns
     ts_col = "Timestamp(s)"
