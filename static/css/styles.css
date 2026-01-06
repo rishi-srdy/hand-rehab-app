@@ -196,3 +196,25 @@ a:hover {
   display: flex;
   align-items: center;
 }
+
+.link-list {
+  margin-top: 10px;
+  padding-left: 18px;
+}
+
+.link-list li {
+  margin: 15px 0;
+}
+
+.link-list a {
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link-list a:hover {
+  text-decoration: underline;
+}
+
+.small{
+  margin-left: 2.15%;
+}
